@@ -38,3 +38,7 @@ jobs:
         run: npx parcel build src/index.html --dist-dir staging
       - name: Listing All the Folders On the Runner
         run: ls -l
+      - name: CD to Staging Folder
+        run:  |
+          cd staging
+          ls -l
