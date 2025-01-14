@@ -1,0 +1,50 @@
+name: ci-wf
+on:
+  pull_request:
+    branches:
+      - develop
+  push:
+    branches:
+      - develop
+jobs:
+  lint-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: First steps
+        run: echo "Allah Pleae Help Me"
+      - name: Checkout Repo temp13wBP
+        uses: actions/checkout@v4
+      - name: install HTMLHint and Stylelint
+        run: |
+          npm install --save-dev htmlhint
+          npm install --save-dev stylelint
+      - name: Lint HTML Files
+        run: npx htmlhint "**/*.html"
+      - name: Lint CSS Files
+        run: npx stylelint "**/*.css"
+      - name: Linting End Status
+        run: echo "Linting Ended Successfully"
+  build-job:
+    needs: "lint-job"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Welcome Step of build-job
+        run: echo "Allah Always Help Me"
+      - name: Checkout Repoistory
+        uses: actions/checkout@v4
+      - name: Install Parcel
+        run: npm install --save-dev parcel
+      - name: Build Website Using Parcel 
+        run: npx parcel build src/index.html --dist-dir staging
+      - name: Listing All the Folders On the Runner
+        run: ls -l
+      - name: CD to Staging Folder
+        run:  |
+          cd staging
+          ls -l
+      - name: Uploading Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: static-website
+          path: staging
+          
