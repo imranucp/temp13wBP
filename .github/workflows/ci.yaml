@@ -33,6 +33,6 @@ jobs:
       - name: Install Parcel
         run: npm install --save-dev parcel
       - name: Build Website Using Parcel 
-        run: npx parcel build ./src/index.html --dist-dir ./staging
+        run: npx parcel build src/index.html --dist-dir ./staging
       - name: Listing All the Folders On the Runner
         run: ls -l
