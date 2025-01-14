@@ -42,3 +42,9 @@ jobs:
         run:  |
           cd staging
           ls -l
+      - name: Uploading Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: static-website
+          path: staging
+          
