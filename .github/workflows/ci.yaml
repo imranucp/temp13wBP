@@ -1,0 +1,32 @@
+name: ci-wf
+on:
+  pull_request:
+    branches:
+      - develop
+  push:
+    branches:
+      - develop
+jobs:
+  lint-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: First steps
+        run: echo "Allah Pleae Help Me"
+      - name: Checkout Repo temp13wBP
+        uses: actions/checkout@v4
+      - name: install HTMLHint and Stylelint
+        run: |
+          npm install --save-dev htmlhint
+          npm install --save-dev stylelint
+      - name: Lint HTML Files
+        run: npx htmlhint "**/*.html"
+      - name: Lint CSS Files
+        run: npx stylelint "**/*.css"
+      - name: Linting End Status
+        run: echo "Linting Ended Successfully"
+  build-job:
+    needs: "lint-job"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Welcome Step of build-job
+        run: echo "Allah Always Help Me"
