@@ -30,6 +30,8 @@ jobs:
     steps:
       - name: Welcome Step of build-job
         run: echo "Allah Always Help Me"
+      - name: Checkout Repoistory
+        uses: actions/checkout@v4
       - name: Install Parcel
         run: npm install --save-dev parcel
       - name: Build Website Using Parcel 
